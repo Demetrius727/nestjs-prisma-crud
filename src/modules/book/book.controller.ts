@@ -1,4 +1,4 @@
-import { Body, Controller, Get, Post } from '@nestjs/common';
+import { Body, Controller, Get, Param, Post, Put } from '@nestjs/common';
 import { BookDTO } from './book.dto';
 import { BookService } from './book.service';
 
@@ -14,5 +14,10 @@ export class BookController {
   @Get()
   async findAll() {
     return this.bookService.findAll();
+  }
+
+  @Put(":id")
+  async update(@Param("id") id: string, @Body() data: BookDTO) {
+    return this.bookService.update(id, data);
   }
 }
